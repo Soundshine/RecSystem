@@ -1,0 +1,96 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-ene-2015, 0:03:06
+    Author     : pmmacaya
+*/
+BODY { background-color:#EEE; color: #444; font-family: Verdana; }
+    
+#header
+{
+    color:#448;
+    margin:20px;
+}
+
+#header input
+{
+    float:right;    
+}
+
+#registration
+{
+    border: dashed thin white;
+    background-color:#F4F4F4;
+    padding: 10px;
+    font-size:10px;
+  
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+#registration input
+{
+    margin:5px;
+    background-color:#F0FFFF;
+}
+/*
+#login input[type="text"]
+{
+    background-color:#F0FFFF;
+}
+#login input[type="password"]
+{
+    background-color:#F0FFFF;
+    
+}*/
+
+#content2
+{
+    margin:10px;
+    padding:10px;
+    border: solid thin #808080;
+}
+
+#content3
+{
+    margin:10px;
+    padding:10px;
+    border: solid thin #808080;
+}
+
+
+#conten3 table
+{
+    border:none;
+    background-color:#F0F5F0;
+    width:50%;    
+}
+
+#content3 td
+{
+    border:none;
+    background-color:#F0F0F5;   
+}
+
+
+#content3 label
+
+{
+    width:100px;
+    font-weight:bold;
+    display:inline-block;   
+}
+
+#content3 input[type="text"]
+
+{
+    text-align:right;   
+}
+
+
+
+
