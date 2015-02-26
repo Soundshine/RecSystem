@@ -24,7 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="\"Role\"")
-public class Role implements Serializable {
+public class Role implements Serializable, RoleDTO {
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -43,6 +43,7 @@ public class Role implements Serializable {
     public Role() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -55,6 +56,7 @@ public class Role implements Serializable {
         this.name = name;
     }
     
+    @Override
     public String getName(){
         return name;
     }

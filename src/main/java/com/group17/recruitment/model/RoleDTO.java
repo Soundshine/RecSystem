@@ -9,11 +9,8 @@ package com.group17.recruitment.model;
  *
  * @author pmmacaya
  */
-public interface ApplicationDTO 
-{
-    public Integer getId();
-    public String getDateMade();
-    public Long getPerson();
-    public Integer getStatus();
-    public Integer getJob();
+public interface RoleDTO {
+    
+    public Long getId();
+    public String getName();   
 }

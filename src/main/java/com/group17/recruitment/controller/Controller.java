@@ -35,15 +35,9 @@ public class Controller {
      * @param username Holder's username
      * @param password Holder's password
      */
-    public void createPerson(String username, String email, String name, String password, String surname)
+    public Boolean createPerson(String username, String email, String name, String password, String surname)
     {
-        Person person = new Person();
-        person.setName(name);
-        person.setEmail(email);
-        person.setSurname(surname);
-        person.setPassword(password);
-        person.setUsername(username);   
-        em.persist(person);
+        return registerLoginDAO.register(name, surname, email, username, password);
     }
     
     /**
@@ -52,7 +46,7 @@ public class Controller {
      * @param username The account username of the searched account.
      * @return The account if it was found.
      */
-    public Person getPerson(String username){
+    public PersonDTO getPerson(String username){
         try
         {           
            return registerLoginDAO.checkUsername(username);

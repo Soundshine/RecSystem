@@ -7,10 +7,12 @@ package com.group17.recruitment.integration;
 
 import com.group17.recruitment.model.Person;
 import com.group17.recruitment.model.PersonDTO;
+import com.group17.recruitment.model.Role;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -22,10 +24,23 @@ public class RegisterLoginDAO {
     @PersistenceContext(unitName = "recruitmentPU")
     private EntityManager em;
     
-    public Person checkUsername(String username){
-        Query query = em.createQuery("SELECT p FROM Person AS p "
-                + "WHERE p.username = ?", PersonDTO.class);
-        query.setParameter(1, username);
-        return (Person) query.getSingleResult();
+    public PersonDTO checkUsername(String username){
+        TypedQuery<PersonDTO> query = em.createQuery("SELECT p FROM Person AS p "
+                + "WHERE p.username = ?1", PersonDTO.class);
+        return query.setParameter(1, username).getSingleResult();
     }
+    
+    public Boolean register (String username, String email, String name, String password, String surname)
+    {
+        Query query = em.createNativeQuery("SELECT id FROM RoleType WHERE name = 'applicant'");
+        Integer roleId = (Integer)query.getSingleResult();
+        
+        Person person = new Person(username, email, name, password, surname,
+                        em.find(Role.class, roleId));
+        em.persist(person);
+        
+        return true;
+    }
+    
+    
 }

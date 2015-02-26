@@ -5,11 +5,17 @@
  */
 package com.group17.recruitment.model;
 
+import java.util.Date;
+
 /**
  *
  * @author pmmacaya
  */
 public interface AvailabilityDTO {
+    public Date getToDate();
+    public Date getFromDate();
+    public Long getId();
+    public Long getPerson();
     
     
 }
