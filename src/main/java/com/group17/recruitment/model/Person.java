@@ -46,6 +46,9 @@ public class Person implements Serializable, PersonDTO {
     private String ssn;
     
     @Column(name = "email", nullable = false)
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
     private String email;
     
     @ManyToOne
@@ -58,6 +61,7 @@ public class Person implements Serializable, PersonDTO {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private Collection<Availability> availability;
+    
     /**
      * Creates a new instance of Person
      */
@@ -74,11 +78,11 @@ public class Person implements Serializable, PersonDTO {
      * @param role
      */
     public Person(String username, String email, String name, String password, String surname, Role role){
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
         this.username = username;
+        this.email = email;
+        this.name = name;
         this.password = password;
+        this.surname = surname;
         this.role = role;
     }
 
