@@ -6,8 +6,6 @@
 package com.group17.recruitment.controller;
 
 import com.group17.recruitment.integration.RegisterLoginDAO;
-import com.group17.recruitment.model.Person;
-import com.group17.recruitment.model.PersonDTO;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -30,10 +28,11 @@ public class Controller {
      * @param email
      * @param username Holder's username
      * @param password Holder's password
+     * @return 
      */
     public Boolean createPerson(String username, String email, String name, String password, String surname)
     {
-        return registerLoginDAO.register(name, surname, email, username, password);
+        return registerLoginDAO.register(username, email, name, password, surname);
     }
     
     /**
@@ -42,7 +41,7 @@ public class Controller {
      * @param username The username of the searched person.
      * @return The person if it was found.
      */
-    public PersonDTO getPerson(String username){
+    public Boolean getPerson(String username){
         try
         {           
            return registerLoginDAO.checkUsername(username);

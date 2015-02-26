@@ -23,7 +23,7 @@ import javax.persistence.Table;
  * @author pmmacaya
  */
 @Entity
-@Table(name="\"Role\"")
+@Table(name="Role")
 public class Role implements Serializable, RoleDTO {
     private static final long serialVersionUID = 1L;
     

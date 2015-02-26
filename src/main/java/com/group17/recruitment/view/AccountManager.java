@@ -76,7 +76,7 @@ public class AccountManager implements Serializable
             transactionFailure = null;
 
             //Man måste kontrollera att ingen 
-            if (controller.getPerson(username)!= null)
+            if (controller.getPerson(username)!= true)
             {
                 setMessage("This username already exists. Please, choose another one.");
                 return "login";

@@ -71,10 +71,10 @@
                     </div>
                     <div id="login">
                         <h1>Login:</h1>   
-                        <h:form>
+                        <form method="POST" action="j_security_check">
                             <p>
                                 <h:outputLabel for="Username" value="Username: "/>
-                                <h:inputText id="Username" required="true" value="#{personManager.username}"
+                                <h:inputText id="j_username" required="true" value="#{personManager.username}"
                                             requiredMessage="Please enter your username"
                                             validatorMessage="Your username must have at least two letters">
                                     <f:validateLength minimum="2"/>
@@ -82,7 +82,7 @@
                                 <h:message for="Username" style="color:red" /> 
                                 <br/>
                                 <h:outputLabel for="Password" value="Password: "/>
-                                <h:inputSecret id="Password" required="true" value="#{personManager.password}"
+                                <h:inputSecret id="j_password" required="true" value="#{personManager.password}"
                                             requiredMessage="Please enter your password"
                                             validatorMessage="Your username must have at least two letters">
                                     <f:validateLength minimum="2"/>
@@ -92,8 +92,8 @@
                             <p>
                                 <h:outputText rendered="#{!empty personManager.message}" value="#{personManager.message}"/>                            
                             </p>
-                            <h:commandButton value="Login" action="#{personManager.login}"/>
-                        </h:form>                        
+                            <h:commandButton value="Login"/>
+                        </form>                        
                     </div>
                 </div>
             </div>
