@@ -1,11 +1,16 @@
 package com.group17.recruitment.model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -20,35 +25,41 @@ public class Person implements Serializable, PersonDTO {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "person_id")
+    @Column(name = "id")
     private Long id;
     
-    @NotNull
-    @Column(name = "username")
+    @Column(name="username", unique = true, nullable = false)
     private String username;
     
-    @NotNull
-    @Column(name = "password")
+    @Column(name="password", nullable = false)
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+             message="{invalid.email}")
     private String password;
     
-    @NotNull
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
     
     @NotNull
     @Column(name = "surname")
     private String surname;
     
-    @Column(name = "ssn")
+    @Column(name = "ssn", length = 13, nullable = false)
     private String ssn;
     
-    @NotNull
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
     
-    @Column(name = "role_id")
-    private int rollId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role", referencedColumnName = "id", nullable = false)
+    private Role role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private Collection<Competence_Profile> competenceProfile;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private Collection<Availability> availability;
     /**
      * Creates a new instance of Person
      */
@@ -62,15 +73,18 @@ public class Person implements Serializable, PersonDTO {
      * @param username
      * @param email
      * @param password
+     * @param role
      */
-    public Person(String username, String email, String name, String password, String surname){
+    public Person(String username, String email, String name, String password, String surname, Role role){
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -80,6 +94,7 @@ public class Person implements Serializable, PersonDTO {
     }
     
     
+    @Override
     public String getName() {
         return name;
     }
@@ -88,6 +103,7 @@ public class Person implements Serializable, PersonDTO {
         this.name = name;
     }
 
+    @Override
     public String getSurname() {
         return surname;
     }
@@ -96,6 +112,7 @@ public class Person implements Serializable, PersonDTO {
         this.surname = surname;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -121,15 +138,17 @@ public class Person implements Serializable, PersonDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public int getRollId() {
-        return rollId;
+           
+    @Override
+    public Long getRole() {
+       return role.getId(); 
     }
 
-    public void setRollId(int rollId) {
-        this.rollId = rollId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
+    
     public String getSsn() {
         return ssn;
     }
@@ -137,8 +156,6 @@ public class Person implements Serializable, PersonDTO {
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -164,4 +181,5 @@ public class Person implements Serializable, PersonDTO {
     public String toString() {
         return "com.group17.recruitment.model.Person[ id=" + id + " ]";
     }       
+
 }

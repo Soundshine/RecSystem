@@ -19,6 +19,12 @@ public interface PersonDTO {
      *
      * @return the password of the holder of this Account.
      */    
-    public String getPassword();   
+    public String getPassword();  
+    
+    public Long getId();
+    public String getName();
+    public String getSurname();
+    public String getEmail();
+    public Long getRole();
     
 }
