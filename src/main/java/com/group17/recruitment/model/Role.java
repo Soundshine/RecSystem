@@ -33,7 +33,6 @@ public class Role implements Serializable, RoleDTO {
     @Column(name = "id")
     private Long id;
     
-    @Basic(optional = false)
     @Column(name="name", nullable = false, unique = true)
     private String name;
     

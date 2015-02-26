@@ -25,15 +25,16 @@ public class RegisterLoginDAO {
     private EntityManager em;
     
     public PersonDTO checkUsername(String username){
-        TypedQuery<PersonDTO> query = em.createQuery("SELECT p FROM Person AS p "
-                + "WHERE p.username = ?1", PersonDTO.class);
-        return query.setParameter(1, username).getSingleResult();
+        Query query = em.createQuery("SELECT p FROM Person AS p "
+                + "WHERE p.username = ?1");
+        return (PersonDTO) query.setParameter(1, username).getSingleResult();
     }
     
     public Boolean register (String username, String email, String name, String password, String surname)
     {
-        Query query = em.createNativeQuery("SELECT id FROM RoleType WHERE name = 'applicant'");
-        Integer roleId = (Integer)query.getSingleResult();
+        Query query = em.createNativeQuery("SELECT id FROM Role WHERE name = ?1");
+        query.setParameter(1, "applicant");
+        Long roleId = (Long)query.getSingleResult();
         
         Person person = new Person(username, email, name, password, surname,
                         em.find(Role.class, roleId));

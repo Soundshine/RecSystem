@@ -10,8 +10,7 @@ import com.group17.recruitment.model.Person;
 import com.group17.recruitment.model.PersonDTO;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 
 /**
  *
@@ -22,12 +21,9 @@ public class Controller {
     
     @EJB
     private RegisterLoginDAO registerLoginDAO;
-
-    @PersistenceContext(unitName = "recruitmentPU")
-    private EntityManager em;
    
     /**
-     * Creates a new account with the specified data.
+     * Creates a new person with the specified data.
      *
      * @param name
      * @param surname
@@ -41,10 +37,10 @@ public class Controller {
     }
     
     /**
-     * Search for the specified account.
+     * Search for the specified person.
      * 
-     * @param username The account username of the searched account.
-     * @return The account if it was found.
+     * @param username The username of the searched person.
+     * @return The person if it was found.
      */
     public PersonDTO getPerson(String username){
         try

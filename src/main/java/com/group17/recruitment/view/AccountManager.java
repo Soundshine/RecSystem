@@ -71,7 +71,7 @@ public class AccountManager implements Serializable
      */    
     public String register()
     {  
-        try{
+       // try{
             message = "";
             transactionFailure = null;
 
@@ -87,13 +87,13 @@ public class AccountManager implements Serializable
                 setMessage("You have been successfully registered. Now you can log in.");
                 return "confirmation";
             }        
-        }
+      /*  }
 
         catch (Exception e) {
             handleException(e);
         }
        
-        return jsf22Bugfix();
+        return jsf22Bugfix();*/
     }
 
     public String getName() {

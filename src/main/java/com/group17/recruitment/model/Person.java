@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,7 +25,8 @@ import javax.validation.constraints.Pattern;
 public class Person implements Serializable, PersonDTO {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "personIdSeq", sequenceName = "PERSON_ID_SEQ", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personIdSeq")
     @Column(name = "id")
     private Long id;
     
@@ -32,27 +34,23 @@ public class Person implements Serializable, PersonDTO {
     private String username;
     
     @Column(name="password", nullable = false)
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-             message="{invalid.email}")
     private String password;
     
     @Column(name = "name", nullable = false)
     private String name;
     
-    @NotNull
     @Column(name = "surname")
     private String surname;
     
-    @Column(name = "ssn", length = 13, nullable = false)
+    @Column(name = "ssn", length = 13)
     private String ssn;
     
     @Column(name = "email", nullable = false)
     private String email;
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "role", referencedColumnName = "id", nullable = false)
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "role", referencedColumnName = "id")
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
